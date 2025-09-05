@@ -1,0 +1,77 @@
+/*
+ * यह फ़ाइल आपकी वेबसाइट को स्टाइल करती है।
+ * इसमें रंग, आकार, फ़ॉन्ट और लेआउट शामिल हैं।
+ */
+
+body {
+    background-color: #f3f4f6;
+    color: #374151;
+}
+
+.sidebar {
+    position: fixed;
+    height: 100vh;
+    left: 0;
+    top: 0;
+    box-shadow: 10px 0px 15px -3px rgba(0, 0, 0, 0.1);
+}
+
+.main-content {
+    margin-left: 0;
+    transition: margin-left 0.3s ease-in-out;
+}
+
+.card {
+    background-color: #ffffff;
+    padding: 1.5rem;
+    border-radius: 1rem;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    transition: transform 0.2s, box-shadow 0.2s;
+    cursor: pointer;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+}
+
+.card-title {
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: #6b7280;
+}
+
+.card-value {
+    font-size: 2.25rem;
+    font-weight: 700;
+    margin-top: 0.5rem;
+    color: #1f2937;
+}
+
+.nav-item {
+    display: flex;
+    align-items: center;
+    padding: 0.75rem;
+    border-radius: 9999px;
+    color: #4b5563;
+    font-weight: 600;
+    transition: background-color 0.2s, color 0.2s;
+}
+
+.nav-item:hover {
+    background-color: #e5e7eb;
+    color: #2563eb;
+}
+
+.nav-item.active-link {
+    background-color: #e5e7eb;
+    color: #2563eb;
+}
+
+/* मोबाइल के लिए */
+@media (max-width: 768px) {
+    .sidebar {
+        position: static;
+        height: auto;
+    }
+}

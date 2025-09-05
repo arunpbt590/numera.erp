@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>शिक्षा ERP पोर्टल</title>
+    <!-- CSS फ़ाइल को जोड़ें -->
+    <link rel="stylesheet" href="style.css">
+    <!-- Tailwind CSS के लिए स्क्रिप्ट -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+    </style>
+</head>
+<body class="bg-gray-100 min-h-screen flex items-center justify-center">
+
+    <!-- लॉगिन सेक्शन -->
+    <section id="login-section" class="w-full flex items-center justify-center p-4">
+        <div class="bg-white p-8 md:p-10 rounded-2xl shadow-xl w-full max-w-sm text-center">
+            <svg class="w-16 h-16 mx-auto text-blue-600 mb-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20v-2a4 4 0 00-4-4H7a4 4 0 00-4 4v2m12-3a4 4 0 11-8 0 4 4 0 018 0z"></path></svg>
+            <h2 class="text-2xl font-bold mb-2">पोर्टल में लॉगिन करें</h2>
+            <p class="text-sm text-gray-500 mb-6">छात्र या शिक्षक के रूप में जारी रखें।</p>
+            <form id="login-form" class="space-y-4">
+                <input type="text" id="username" placeholder="उपयोगकर्ता नाम (student/faculty)" class="w-full px-4 py-2 border rounded-full focus:outline-none focus:ring-2 focus:ring-blue-500 transition-shadow">
+                <input type="password" id="password" placeholder="पासवर्ड (123)" class="w-full px-4 py-2 border rounded-full focus:outline-none focus:ring-2 focus:ring-blue-500 transition-shadow">
+                <button type="submit" class="w-full bg-blue-600 text-white py-2 rounded-full font-semibold hover:bg-blue-700 transition-colors">लॉगिन करें</button>
+            </form>
+            <p id="error-message" class="text-red-500 mt-4 hidden"></p>
+        </div>
+    </section>
+
+    <!-- डैशबोर्ड सेक्शन (शुरुआत में छिपा हुआ) -->
+    <main id="dashboard-section" class="hidden w-full h-full flex flex-col md:flex-row bg-gray-100">
+
+        <!-- साइडबार नेविगेशन -->
+        <aside class="sidebar w-full md:w-64 bg-white p-6 md:p-8 shadow-2xl">
+            <h1 class="text-2xl font-bold text-gray-800 mb-8">ERP पोर्टल</h1>
+            <nav class="space-y-4">
+                <div id="student-menu" class="hidden space-y-4">
+                    <a href="#" class="nav-item nav-item-student active-link">
+                        <svg class="w-6 h-6 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"></path></svg>
+                        <span>डैशबोर्ड</span>
+                    </a>
+                    <a href="#" class="nav-item nav-item-student">
+                        <svg class="w-6 h-6 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.468 9.24 5.253 7.5 5.253v13C9.24 18.747 10.832 18.532 12 18.747m0-13A9 9 0 1012 21.253a9 9 0 000-15z"></path></svg>
+                        <span>असाइनमेंट</span>
+                    </a>
+                    <a href="#" class="nav-item nav-item-student">
+                        <svg class="w-6 h-6 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
+                        <span>टाइमटेबल</span>
+                    </a>
+                </div>
+                
+                <div id="faculty-menu" class="hidden space-y-4">
+                    <a href="#" class="nav-item nav-item-faculty active-link">
+                        <svg class="w-6 h-6 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path></svg>
+                        <span>डैशबोर्ड</span>
+                    </a>
+                    <a href="#" class="nav-item nav-item-faculty">
+                        <svg class="w-6 h-6 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9h2m-2 4h2m2-4h2m-2 4h2m2-4h2m-2 4h2M9 9h.01M15 9h.01"></path></svg>
+                        <span>उपस्थिति</span>
+                    </a>
+                    <a href="#" class="nav-item nav-item-faculty">
+                        <svg class="w-6 h-6 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c1.657 0 3 .895 3 2s-1.343 2-3 2-3 .895-3 2c0 .546-.118 1.056-.34 1.5M12 8V5m0 3v5m0 0a2 2 0 100 4m0-4a2 2 0 100-4m0-4a2 2 0 100-4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                        <span>परिणाम</span>
+                    </a>
+                </div>
+            </nav>
+        </aside>
+
+        <!-- मुख्य कंटेंट -->
+        <main class="main-content flex-1 p-8 overflow-y-auto">
+            <header class="flex justify-between items-center mb-6">
+                <h2 id="main-title" class="text-3xl font-bold text-gray-800">डैशबोर्ड</h2>
+                <div class="relative">
+                    <span id="user-info" class="text-lg font-semibold text-gray-700"></span>
+                    <button id="logout-btn" class="ml-4 px-4 py-2 bg-red-500 text-white rounded-full font-semibold hover:bg-red-600 transition-colors">लॉगआउट</button>
+                </div>
+            </header>
+
+            <!-- स्टूडेंट डैशबोर्ड -->
+            <section id="student-dashboard" class="user-dashboard active-user-dashboard space-y-8">
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                    <div class="card">
+                        <h3 class="card-title">उपस्थिति</h3>
+                        <p class="card-value">85%</p>
+                    </div>
+                    <div class="card">
+                        <h3 class="card-title">असाइनमेंट</h3>
+                        <p class="card-value">5/7 पूरे</p>
+                    </div>
+                    <div class="card">
+                        <h3 class="card-title">ग्रेड</h3>
+                        <p class="card-value">A-</p>
+                    </div>
+                    <div class="card">
+                        <h3 class="card-title">शुल्क</h3>
+                        <p class="card-value text-green-500">पूरा हुआ</p>
+                    </div>
+                </div>
+                <div class="card">
+                    <h3 class="text-lg font-bold mb-4">हाल के असाइनमेंट</h3>
+                    <ul class="list-disc pl-5 space-y-2 text-gray-700">
+                        <li>गणित - बीजगणित का परिचय (जमा करें)</li>
+                        <li>भौतिकी - गति के नियम (जमा करें)</li>
+                        <li>कंप्यूटर विज्ञान - HTML मूल बातें (पूरा हुआ)</li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- फैकल्टी डैशबोर्ड (शुरुआत में छिपा हुआ) -->
+            <section id="faculty-dashboard" class="user-dashboard hidden space-y-8">
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                    <div class="card">
+                        <h3 class="card-title">कुल छात्र</h3>
+                        <p class="card-value">120</p>
+                    </div>
+                    <div class="card">
+                        <h3 class="card-title">आज की कक्षाएं</h3>
+                        <p class="card-value">3</p>
+                    </div>
+                    <div class="card">
+                        <h3 class="card-title">असाइनमेंट सबमिट</h3>
+                        <p class="card-value">75</p>
+                    </div>
+                    <div class="card">
+                        <h3 class="card-title">नोटिस</h3>
+                        <p class="card-value">2 नए</p>
+                    </div>
+                </div>
+                <div class="card">
+                    <h3 class="text-lg font-bold mb-4">हाल के असाइनमेंट</h3>
+                    <table class="w-full text-left table-auto">
+                        <thead>
+                            <tr class="bg-gray-100">
+                                <th class="py-2 px-4 rounded-tl-lg">असाइनमेंट</th>
+                                <th class="py-2 px-4">कक्षा</th>
+                                <th class="py-2 px-4 rounded-tr-lg">जमा किए गए</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="py-3 px-4">HTML मूल बातें</td>
+                                <td class="py-3 px-4">कक्षा 12</td>
+                                <td class="py-3 px-4">35/40</td>
+                            </tr>
+                            <tr class="bg-gray-50">
+                                <td class="py-3 px-4">बीजगणित</td>
+                                <td class="py-3 px-4">कक्षा 10</td>
+                                <td class="py-3 px-4">30/35</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+        </main>
+    </main>
+
+    <!-- JavaScript फ़ाइल को जोड़ें -->
+    <script src="script.js"></script>
+
+</body>
+</html>
